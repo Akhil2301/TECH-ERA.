@@ -1,0 +1,110 @@
+.head {
+  padding: 15px 0;
+  color: rgb(255, 248, 248);
+}
+
+.logo h1 {
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+.head .icon {
+  margin-left: 20px;
+}
+
+/*----- Header ----*/
+
+header {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  margin: 0 30px;
+  position: relative;
+}
+
+header ul {
+  padding: 30px 15px;
+  text-transform: uppercase;
+}
+
+header li {
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+header ul li a {
+  color: #fff;
+  font-weight: 800;
+  transition: 0.5s;
+}
+header ul li a:hover {
+  color: #1eb2a6;
+}
+
+.start {
+  background-color: #1eb2a6;
+  padding: 30px 20px;
+  color: #fff;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.toggle {
+  display: none;
+}
+button {
+  border: none;
+}
+
+@media screen and (max-width: 768px) {
+
+
+  .head .logo h1 {
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.head .icon {
+  margin-left: 20px;
+}
+  .start {
+    clip-path: none;
+  }
+
+  header {
+    margin: 0;
+    background-color: #1eb2a6;
+    position: relative;
+  }
+  header ul.flexSB {
+    display: none;
+  }
+  header ul li {
+    margin-bottom: 10px;
+  }
+  .toggle {
+    display: block;
+    background-color:  rgba(255, 255, 255, -20.2) !important;
+    color: rgb(2, 2, 2);
+    font-size: 30px;
+    position: absolute;
+    right: 30px;
+    top: -30px;
+    
+  }
+  .mobile-nav {
+    z-index: 1;
+    position: absolute;
+    top: 7vh;
+    width: 100%;
+    left: 0;
+    background-color: #1eb2a6;
+  }
+  .logo h1 {
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+
+  .head .icon {
+    margin-left: 10px;
+    font-size: 20px;
+  }
+}

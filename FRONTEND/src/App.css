@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Quicksand", sans-serif;
+  background-color: #c7cfff;
+}
+
+.container {
+  max-width: 85%;
+
+  margin: auto;
+}
+
+.flexSB {
+  display: flex;
+  justify-content: space-between;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #1eb2a6;
+  transition: 0.5s;
+}
+
+.icon:hover {
+  cursor: pointer;
+  background-color: #1eb2a6;
+  color: #fff;
+}
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+
+.row {
+  width: 50%;
+}
+button {
+  padding: 17px 30px;
+  background-color: #fff;
+  color: #1eb2a6;
+  font-weight: 600;
+  border: none;
+  margin: 30px 10px 0 0;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 24px 36px -11px rgba(0 0 0 /9%);
+}
+button i {
+  margin-left: 20px;
+}
+
+button:hover {
+  box-shadow: none;
+}
+
+.primary-btn {
+  background-color: #1eb2a6;
+  color: #fff;
+}
+#heading {
+  text-align: center;
+  padding: 40px 0;
+}
+#heading h3{
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #1eb2a6;
+  text-transform: uppercase;
+}
+#heading h1 {
+  font-size: 30px;
+  margin: 20px 0;
+  text-transform: capitalize;
+}
+
+p {
+  line-height: 30px;
+  font-size: 18px;
+}
+
+@media screen and (max-width:768px) {
+  .margin{
+      height: 40vh;
+  }
+  #heading h3{
+    font-size: 35px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #1eb2a6;
+    text-transform: uppercase;
+  }
+  #heading h1 {
+    font-size: 45px;
+    margin: 20px 0;
+    text-transform: capitalize;
+  }
+ 
+  .hero .row{
+    width: 100%;
+    padding-top: 20%;
+  }
+}
