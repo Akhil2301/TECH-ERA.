@@ -6,7 +6,7 @@ function Usersettings() {
   
   return (
     <>
-      <div className='flex'>
+      <div className='flex bg-gray-900'>
       <Adminhome/>
       <Settings />
       </div>

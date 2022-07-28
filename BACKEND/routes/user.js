@@ -5,7 +5,7 @@ const {signup,authUser,userData,blockUser,unBlockUser}=require('../controllers/u
 // const {userSignupValidator}=require('../validator/index')
 console.log('connection');
 router.post('/signup',signup);
-router.post('/login',authUser);
+router.post('/login',verifytoken.VerifyAdmin,authUser);
 router.get('/userData', userData)
 router.patch('/blockUser',verifytoken.VerifyAdmin, blockUser)
 router.patch('/unBlockUser',verifytoken.VerifyAdmin,unBlockUser)

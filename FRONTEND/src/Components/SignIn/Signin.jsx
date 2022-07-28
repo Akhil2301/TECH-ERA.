@@ -15,6 +15,12 @@ function Signin(props) {
   
   const userInfo=localStorage.getItem('userInfo',JSON.stringify)
   const userData=JSON.parse(localStorage.getItem('userInfo'));
+
+  const localstore = localStorage.getItem("userInfo");
+  
+  
+ 
+
   useEffect(()=>{
     
     
@@ -59,7 +65,7 @@ function Signin(props) {
   }
   return (
     <>
-    {props.admin ? <Head/> :null}
+    {props.admin ? null:null}
       <div className="min-h-full flex items-center justify-center py-10 px-4 sm:px-6 lg:px-8 ">
         <div className="max-w-md w-full space-y-8  sm:px-2 py-4 ">
           <div>
@@ -109,7 +115,7 @@ function Signin(props) {
 
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <input
+                {/* <input
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
@@ -121,7 +127,7 @@ function Signin(props) {
                 >
                   {" "}
                   Remember me{" "}
-                </label>
+                </label> */}
               </div>
 
               <div className="text-sm">

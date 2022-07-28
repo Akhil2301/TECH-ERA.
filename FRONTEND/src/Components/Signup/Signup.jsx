@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {UserAlredyExist} from "../ErrorMessge/Erromessage";
 import axios from 'axios'
-function Signup() {
+function Signup(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -95,7 +95,11 @@ function Signup() {
       })
       .then((response) => {
         setUser(response.data);
+        if(props.addUser){
+        navigate('/settings')
+      }else{
         navigate('/signin')
+      }
       }).catch(err=>{
         setError(err.response.data.message)
       });
@@ -109,11 +113,11 @@ function Signup() {
   return (
     <>
     
-      <div className="min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8 ">
+      <div className={` ${props.addUser? 'lg:px-64  items-center w-full bg-gray-900':'min-h-full flex items-center justify-center py-2 px-4 sm:px-6 lg:px-8 '}`}>
         <div className="max-w-md w-full space-y-6 border-solid  sm:px-2 py-2 ">
           <div>
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-[#1eb2a6] text-bold">
-              SIGN UP
+            <h2 className={`mt-6 text-center text-3xl font-extrabold ${props.addUser?'text-green-900 text-5':'text-[#1eb2a6]'} text-bold`}>
+            {props.addUser?'ADD USER':'SIGN UP'}
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
             {error && <UserAlredyExist>{error}</UserAlredyExist>}
@@ -210,7 +214,7 @@ function Signup() {
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#1eb2a6] hover:bg-[#1eb2d6]  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className={`group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white ${props.admin?'bg-green-400 hover:bg-[#1eb2d6]}':'bg-[#1eb2a6] hover:bg-[#1eb2d6]}'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <svg
@@ -227,15 +231,16 @@ function Signup() {
                     />
                   </svg>
                 </span>
-                Signup
+                {props.addUser?'ADD USER':'Signup'}
               </button>
               <div className="py-2">
+              {props.addUser?'':
                 <Link to="/SignIn">
                   <p className="text-center text-[#1eb2a6] font-bold">
                     Existing User?{" "}
                     <span className="text-black font-bold">Sign In </span>
                   </p>
-                </Link>
+                </Link>}
               </div>
               <div className="flex">
                 {/* <button className="bg-dark hover:bg-indigo-100 text-gray-800 font-semibold py-2 w-full  border border-gray-400 rounded shadow">
