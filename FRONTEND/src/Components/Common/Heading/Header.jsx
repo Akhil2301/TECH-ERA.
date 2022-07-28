@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import Head from "./Head";
 import { Link } from "react-router-dom";
-import {useNavigate} from 'react-router';
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
+
 import "./Header.css";
 function Header() {
-  const navigate=useNavigate()
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const navigate = useNavigate();
+  const userInfo=localStorage.getItem('userInfo',JSON.stringify)
+
+  
   const [click, setClick] = useState(false);
+ 
+ 
+  
+
+  
   return (
     <>
       <Head />
@@ -38,15 +47,39 @@ function Header() {
               <Link to="/signup">FAQ</Link>
             </li>
 
-            {userInfo?
+            {userInfo ? (
               <li>
-                <Link to="/" onClick={()=>{
-                  localStorage.removeItem('userInfo')
-                }}>Logout</Link>
-              </li>:<li>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    Swal.fire({
+                      title: "Do you Want to Logout?",
+                      showDenyButton: true,
+                      confirmButtonText: "No",
+                      denyButtonText: "Yes",
+                      customClass: {
+                        actions: "my-actions",
+                        confirmButton: "order-3",
+                        denyButton: "order-2",
+                      },
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                      } else if (result.isDenied) {
+                        // Swal.fire('', '', 'info')
+                        localStorage.removeItem("userInfo");
+                        navigate("/signin");
+                      }
+                    });
+                  }}
+                >
+                  Logout
+                </Link>
+              </li>
+            ) : (
+              <li>
                 <Link to="/SignIn">Login</Link>
               </li>
-            }
+            )}
           </ul>
           <div className="start">
             <div className="button">GET ADMISSION FORM</div>
@@ -55,7 +88,7 @@ function Header() {
             className="toggle"
             onClick={() => {
               setClick(!click);
-              navigate('/')
+              navigate("/");
             }}
           >
             {click ? (

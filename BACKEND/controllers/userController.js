@@ -49,4 +49,32 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { signup, authUser };
+const userData = asyncHandler(async (req, res) => {
+  
+  const users = await User.find({isAdmin:false});
+  res.json({
+    users
+  })
+});
+
+
+const blockUser= asyncHandler(async (req, res) => {
+ 
+  const { _id } = req.body 
+  const userData = await User.findOne({ _id }).catch(() => { throw new Error('User Not found') })  
+  await userData.updateOne({
+    $set: { status: false }
+  })
+  res.json({ userData })
+})
+const unBlockUser= asyncHandler(async (req, res) => {
+  
+  const { _id } = req.body
+  const userData = await User.findOne({ _id }).catch(() => { throw new Error('User Not found') })
+  await userData.updateOne({
+    $set: { status: true }
+  })
+  res.json({ userData })
+})
+
+module.exports = { signup, authUser,userData,blockUser,unBlockUser};

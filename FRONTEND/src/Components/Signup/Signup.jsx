@@ -8,11 +8,82 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState("");
-  const [error,setError]=useState(false)
+  const [error,setError]=useState(false);
+
+
+
+  const [errName,setErrName]=useState('')
+  const [errEmail,setErrEmail]=useState('')
+  const [errMob,setErrMob]=useState('')
+ const [errPass,setErrPass]=useState('')
+ 
+ 
+
+  const handleName=()=>{
+    if(name.trim()===''){
+      setErrName('Name cannot be empty')
+     return false
+    }else{
+      setErrName('')
+      return true
+    }
+  }
+   const handlePass=()=>{
+    if(password.trim()===''){
+      setErrPass('Password cannot be empty')
+     return false
+    }else if(password.length<6){
+      setErrPass('Password must be atleast 6 characters')
+      return false
+    }
+    
+    else{
+      setErrPass('')
+      return true
+    }
+  }
+  const handleMobile=()=>{
+    if(phone.trim()===''){
+      setErrMob('Mobile number cannot be empty')
+     return false
+    }else if(phone.length <10){
+      setErrMob('Invalid mobile number')
+      return false;
+    }
+     
+    else{
+      setErrMob('')
+      return true
+    }
+  }
+  const handleEmail=()=>{
+    if(email.trim()===''){
+      setErrEmail('Email cannot be empty')
+     return false
+    }else if( !email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)){
+      setErrEmail('Enter a proper email')
+      return false;
+    }
+    
+    else{
+      setErrEmail('')
+      return true
+    }
+  }
+
+
+
+
+
+
+
+
+
+
   const navigate=useNavigate();
   async function registerUser(event) {
     event.preventDefault();
-
+    if( handleEmail()&&handleMobile()&&handleName()&&handlePass() ){
     await axios
       .post("/signup",
       
@@ -28,6 +99,11 @@ function Signup() {
       }).catch(err=>{
         setError(err.response.data.message)
       });
+    }else if(!handleEmail()&&!handleMobile()&&!handleName()&&!handlePass()){
+      
+   
+   
+    }
   }
 
   return (
@@ -57,10 +133,12 @@ function Signup() {
                   name="name"
                   type="text"
                   autoComplete="name"
-                  required
+                  
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Full Name"
+                  onKeyUp={()=>handleName()}
                 />
+                 <div><span style={{color:'red'}} >{errName}</span></div>
               </div>
 
               <div className="pb-2">
@@ -73,10 +151,12 @@ function Signup() {
                   name="email"
                   type="email"
                   autoComplete="email"
-                  required
+                 
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                  onKeyUp={()=>handleEmail()}
                 />
+                 <div><span style={{color:'red'}} >{errEmail}</span></div>
               </div>
 
               <div className="pb-2">
@@ -89,10 +169,12 @@ function Signup() {
                   onChange={(e) => setPhone(e.target.value)}
                   type="number"
                   autoComplete="phone"
-                  required
+                  
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="phone"
+                  onKeyUp={()=>handleMobile()}
                 />
+                <div><span style={{color:'red'}} >{errMob}</span></div>
               </div>
 
               <div className="pb-2">
@@ -105,10 +187,12 @@ function Signup() {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   autoComplete="current-password"
-                  required
+                 
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
+                  onKeyUp={()=>handlePass()}
                 />
+                <div><span style={{color:'red'}} >{errPass}</span></div>
               </div>
             </div>
 

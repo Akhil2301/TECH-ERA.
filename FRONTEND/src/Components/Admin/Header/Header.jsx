@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 function Header() {
   const [open, setOpen] = useState(true);
+  const navigate=useNavigate()
 
+ 
   //   const Menus = { title: props.nav};
   //   function renderElement(){
   //     if( Menus.title=== 'settings')
   //        return <Setting />;
 
   //  }
+
+  
+
 
   return (
     <div className="">
@@ -67,16 +74,63 @@ function Header() {
             <img
               src={require(`../Assets/Setting.png`)}
               className={`w-10 cursor-pointer duration-500`}
-              alt="logo" onClick={()=>{
-                localStorage.removeItem('userInfo')
+              alt="logo"
+              //  onClick={()=>{
+              //   localStorage.removeItem('userInfo')
+              // }}
+
+              
+              onClick={() => {
+                Swal.fire({
+                  title: "Do you Want to Logout?",
+                  showDenyButton: true,
+                  confirmButtonText: "No",
+                  denyButtonText: "Yes",
+                  customClass: {
+                    actions: "my-actions",
+                    confirmButton: "order-3",
+                    denyButton: "order-2",
+                  },
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    localStorage.removeItem("userInfo");
+                  } else if (result.isDenied) {
+                    // Swal.fire('', '', 'info')
+                    localStorage.removeItem("userInfo");
+                    navigate('/admin')
+                  }
+                });
               }}
             />
             <h1
               className={`text-white pl-6 orgin-left font-medium text-xl duration-300 ${
                 !open && "scale-0"
               }`}
+              // onClick={() => {
+
+              //   //localStorage.removeItem("userInfo");
+              // }}
+
               onClick={() => {
-                localStorage.removeItem("userInfo");
+                Swal.fire({
+                  title: "Do you Want to Logout?",
+                  showDenyButton: true,
+                  confirmButtonText: "No",
+                  denyButtonText: "Yes",
+                  customClass: {
+                    actions: "my-actions",
+                    confirmButton: "order-3",
+                    denyButton: "order-2",
+                  },
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    localStorage.removeItem("userInfo");
+                  } else if (result.isDenied) {
+                    // Swal.fire('', '', 'info')
+                    localStorage.removeItem("userInfo");
+                    navigate('/admin')
+                  }
+                });
               }}
             >
               Logout
